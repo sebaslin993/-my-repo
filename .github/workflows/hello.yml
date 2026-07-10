@@ -3,7 +3,7 @@ name: Hello Actions
 on:
   push:
     branches: [main]
-    
+     
 jobs:
   say-hello:
     runs-on: ubuntu-latest
