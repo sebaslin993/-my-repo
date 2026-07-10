@@ -7,7 +7,7 @@ on:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - name: Print a greeting
-          run: echo "Hello, GitHub Actions! This ran automatically on push."
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print a greeting
+        run: echo "Hello, GitHub Actions! This ran automatically on push."
