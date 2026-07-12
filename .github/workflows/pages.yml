@@ -26,13 +26,13 @@ jobs:
         uses: mymindstorm/setup-emsdk@v14
 
       - name: Build Assignment 2
-        working-directory: Assignment2
+        working-directory: Assignment-2-3DFan
         run: bash build_web.sh
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Assignment2/web
+          path: Assignment-2-3DFan/web
 
   deploy:
     needs: build-web
