@@ -1,0 +1,10 @@
+build/
+build-check/
+web/
+external/
+.gradle/
+.idea/
+android/app/build/
+android/app/.cxx/
+local.properties
+*.iml
