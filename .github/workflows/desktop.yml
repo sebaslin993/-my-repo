@@ -28,9 +28,7 @@ jobs:
           sudo apt-get install -y cmake build-essential xorg-dev libgl1-mesa-dev
 
       - name: Configure
-        working-directory: Assignment-2-3DFan
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
-        working-directory: Assignment-2-3DFan
         run: cmake --build build --config Release

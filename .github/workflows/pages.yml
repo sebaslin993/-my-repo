@@ -2,7 +2,8 @@ name: Build and Deploy Fan3D WebGL
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -25,24 +26,31 @@ jobs:
       - name: Set up Emscripten
         uses: mymindstorm/setup-emsdk@v14
 
-      - name: Build Assignment 2
-        working-directory: Assignment-2-3DFan
+      - name: Build WebGL
         run: bash build_web.sh
+
+      - name: Prepare Pages directory
+        run: |
+          mkdir -p pages/Assignment-2-3DFan
+          cp -r web/* pages/Assignment-2-3DFan/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Assignment-2-3DFan/web
+          path: pages
 
   deploy:
-    needs: build-web
-    runs-on: ubuntu-latest
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
+    runs-on: ubuntu-latest
+    needs: build-web
+
     steps:
-      - name: Deploy GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -36,11 +36,11 @@ jobs:
           gradle-version: '9.5.0'
 
       - name: Build debug APK
-        working-directory: Assignment-2-3DFan/android
+        working-directory: android
         run: gradle assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Fan3D-Android-APK
-          path: Assignment-2-3DFan/android/app/build/outputs/apk/debug/*.apk
+          path: android/app/build/outputs/apk/debug/*.apk
