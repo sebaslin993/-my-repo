@@ -1,0 +1,37 @@
+name: Quiz 1 Desktop Builds
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Quiz1/**"
+      - ".github/workflows/quiz1-desktop.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential xorg-dev libgl1-mesa-dev
+
+      - name: Configure Quiz 1
+        run: cmake -S Quiz1/3-HelloWorldOpenGLES-JNI-Android-PC-WebGL-CrossPlatform -B Quiz1/3-HelloWorldOpenGLES-JNI-Android-PC-WebGL-CrossPlatform/build -DCMAKE_BUILD_TYPE=Release -DGLFW_BUILD_WAYLAND=OFF
+
+      - name: Build Quiz 1
+        run: cmake --build Quiz1/3-HelloWorldOpenGLES-JNI-Android-PC-WebGL-CrossPlatform/build --config Release

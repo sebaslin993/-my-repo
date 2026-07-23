@@ -1,4 +1,4 @@
-name: Build and Deploy Quiz 2 and Quiz 3 WebGL
+name: Build and Deploy Quiz 1, Quiz 2, and Quiz 3 WebGL
 
 on:
   push:
@@ -26,6 +26,10 @@ jobs:
       - name: Set up Emscripten
         uses: mymindstorm/setup-emsdk@v14
 
+      - name: Build Quiz 1 WebGL
+        working-directory: Quiz1/3-HelloWorldOpenGLES-JNI-Android-PC-WebGL-CrossPlatform
+        run: bash build_web.sh
+
       - name: Build Quiz 2 WebGL
         run: bash build_web.sh
 
@@ -33,10 +37,12 @@ jobs:
         working-directory: Quiz-3-Project
         run: bash build_web.sh
 
-      - name: Prepare Pages directory for both quizzes
+      - name: Prepare Pages directory for all quizzes
         run: |
+          mkdir -p pages/Assignment-1-Primitives
           mkdir -p pages/Assignment-2-3DFan
           mkdir -p pages/Assignment-3-HUD
+          cp -r Quiz1/3-HelloWorldOpenGLES-JNI-Android-PC-WebGL-CrossPlatform/web/* pages/Assignment-1-Primitives/
           cp -r web/* pages/Assignment-2-3DFan/
           cp -r Quiz-3-Project/web/* pages/Assignment-3-HUD/
 

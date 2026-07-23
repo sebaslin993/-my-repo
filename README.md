@@ -4,6 +4,7 @@ A cross-platform OpenGL ES 3.0 table fan built from one indexed cube. The same s
 
 Live projects:
 
+- [Assignment 1 - Primitives](https://sebaslin993.github.io/CSD2101/Assignment-1-Primitives/)
 - [Assignment 2 - 3D Fan](https://sebaslin993.github.io/CSD2101/Assignment-2-3DFan/)
 - [Assignment 3 - HUD](https://sebaslin993.github.io/CSD2101/Assignment-3-HUD/)
 
