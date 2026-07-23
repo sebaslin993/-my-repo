@@ -1,0 +1,12 @@
+build/
+build-check/
+build_desktop/
+web/
+external/
+.gradle/
+.idea/
+android/app/build/
+android/app/.cxx/
+android/local.properties
+*.iml
+screenshots/

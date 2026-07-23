@@ -1,4 +1,4 @@
-name: Build and Deploy Fan3D WebGL
+name: Build and Deploy Quiz 2 and Quiz 3 WebGL
 
 on:
   push:
@@ -26,13 +26,19 @@ jobs:
       - name: Set up Emscripten
         uses: mymindstorm/setup-emsdk@v14
 
-      - name: Build WebGL
+      - name: Build Quiz 2 WebGL
         run: bash build_web.sh
 
-      - name: Prepare Pages directory
+      - name: Build Quiz 3 WebGL
+        working-directory: Quiz-3-Project
+        run: bash build_web.sh
+
+      - name: Prepare Pages directory for both quizzes
         run: |
           mkdir -p pages/Assignment-2-3DFan
+          mkdir -p pages/Assignment-3-HUD
           cp -r web/* pages/Assignment-2-3DFan/
+          cp -r Quiz-3-Project/web/* pages/Assignment-3-HUD/
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

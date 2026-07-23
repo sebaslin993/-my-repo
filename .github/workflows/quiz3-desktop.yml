@@ -1,0 +1,37 @@
+name: Quiz 3 Desktop Builds
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Quiz-3-Project/**"
+      - ".github/workflows/quiz3-desktop.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential xorg-dev libgl1-mesa-dev
+
+      - name: Configure Quiz 3
+        run: cmake -S Quiz-3-Project -B Quiz-3-Project/build -DCMAKE_BUILD_TYPE=Release -DGLFW_BUILD_WAYLAND=OFF
+
+      - name: Build Quiz 3
+        run: cmake --build Quiz-3-Project/build --config Release

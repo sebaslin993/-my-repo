@@ -1,0 +1,49 @@
+name: Quiz 3 Android Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Quiz-3-Project/**"
+      - ".github/workflows/quiz3-android.yml"
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android packages
+        run: |
+          sdkmanager "platforms;android-36" \
+                     "build-tools;36.0.0" \
+                     "cmake;3.22.1" \
+                     "ndk;27.0.12077973"
+
+      - name: Set up Gradle 8.13
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
+      - name: Build Quiz 3 debug APK
+        working-directory: Quiz-3-Project/android
+        run: gradle assembleDebug --no-daemon
+
+      - name: Upload Quiz 3 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Quiz-3-Android-APK
+          path: Quiz-3-Project/android/app/build/outputs/apk/debug/*.apk

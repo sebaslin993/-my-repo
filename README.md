@@ -2,6 +2,11 @@
 
 A cross-platform OpenGL ES 3.0 table fan built from one indexed cube. The same shared C++ scene runs on Windows Desktop, Android, and WebGL.
 
+Live projects:
+
+- [Assignment 2 - 3D Fan](https://sebaslin993.github.io/CSD2101/Assignment-2-3DFan/)
+- [Assignment 3 - HUD](https://sebaslin993.github.io/CSD2101/Assignment-3-HUD/)
+
 The fan consists of seven draws of one VAO:
 
 - Brown base
